@@ -1,0 +1,52 @@
+.titulo-principal{
+    margin-top: 50px;
+}
+
+.titulo{
+    color: white;
+}
+
+#formulario{
+    color: white;
+    margin: auto;
+    padding: 50px 55px;
+    box-shadow: 0 0 20px black;
+    border-radius: 20px;
+    text-align: center;
+    width: 500px;
+    margin-top: 50px;
+    margin-bottom: 50px ;
+}
+
+#formulario p{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.contenedor-form{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+
+
+input, textarea{
+    color: white;
+    padding: 12px 20px;
+    background-color: #641C34;
+    border: 2px solid rgb(252, 220, 220);
+    outline: none;
+    border-radius: 15px;
+
+}
+
+#btn-enviar{
+    color: white;
+}

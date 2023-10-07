@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/registro.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+
+    <div class="titulo-principal">
+        <h1 class="titulo text-center">Taller Mecánico RayoMkween</h1>
+    </div>
+    <section id="formulario">
+        <h1>Formulario de Registro</h1>
+        <p>Crear una cuenta es tu mejor decision!</p>
+        <form action="{% url 'REGISTRO' %}" method="POST">
+        {% csrf_token %}
+            <div class="contenedor-form">
+                <label for="nombre" >Nombre de Usuario*</label>
+                <input type="text" name="txtNombre" id="txtNombre" placeholder="Ingrese nombre" required minlength="3" maxlength="15">
+                <label for="apellido" >Nombre y Apellido*</label>
+                <input type="text" name="txtApellido" id="txtApellido" placeholder="Ingrese apellido" required minlength="3" maxlength="15">
+                <label for="correo">Correo *</label>
+                <input type="email" name="txtCorreo" id="txtCorreo" placeholder="Ingrese correo" required>
+                <label for="mensaje">Contraseña *</label>
+                <input type="password" name="pwd1" id="pwd1" placeholder="Ingrese contraseña" required>
+                <label for="mensaje">Repita contraseña *</label>
+                <input type="password" name="pwd2" id="pwd2" placeholder="Ingrese contraseña" required>
+                <p class=>¿Ya estas registrado? <a href="{% url 'LOGIN'%}">Inicia sesion.</a> </p>
+                <input type="submit" value="Enviar" id="btn-enviar">
+            
+            </div>
+        </form>
+    </section>
+{% endblock contenido %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/registrar_atencion.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="titulo_principal">
+        <h1 class="titulo text-center">Registrar atenciones</h1>
+    </div>
+
+    <section id="formulario" class="bg-dark">
+        <h1>Agregar atención</h1>
+        <form action="{% url 'MODEF'%}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="contenedor-form">
+                <form action="{% url 'MODEF' %}" method="POST" enctype="multipart/form-data">
+                <label for="tipoMeca" >Mecanico encargado*</label>
+                
+                <select name="cboMecanico" id="cboMecanico">
+                    {% for mecanico in mecanicos %}
+                        <option value="{{mecanico.rut}}">{{mecanico.nombre}}</option>
+                    {% endfor %}
+                    
+                </select>
+
+                <label for="tipoAte" >Especialidad de la atención*</label>
+
+                <select name="cboEspecialidad" id= "cboEspecialidad">
+                    {% for especialidad in especialidades %}
+                        <option value="{{especialidad.id}}">{{especialidad.nombre}}</option>
+                    {% endfor %}
+                    
+                </select>
+                <input type="hidden" name="txtId" value="{{ate.idAtencion}}">
+                <label for="ateTitle" >Titulo*</label>
+                <input value="{{ate.titulo}}" type="text" name="txtTitulo" id="txtTitulo" placeholder="Ingrese titulo de la atención" required minlength="6" maxlength="60">
+                <label for="descAte">Descripcion de la atención*</label>
+                <textarea name="txtDescripcion" id="txtDescripcion" cols="30" rows="10" placeholder="Ingrese descripción de la atención" required minlength="10">{{ate.descAte}}</textarea>
+                <label for="materiales">Materiales usados*</label>
+                <textarea  name="txtMateriales" id="txtMateriales" cols="20" rows="10" placeholder="Ingrese materiales usados en la atención" required minlength="10">{{ate.materiales}}</textarea>
+                <label for="fecha">Fecha de la atención *</label>
+                <input value="{{ate.fecha}}" type="date" name="datFecha" id="datFecha" required>
+                <label for="subirFoto">Fotos de la atención*</label>
+                <img src="{{ate.foto.url}}">
+                <input value="{{ate.foto}}" type="file" name="fileFoto" id="fileFoto" placeholder="Subir archivo">
+                <input type="submit" value="Enviar" id="btnEnviar">
+            </form>
+                
+            
+            </div>
+        </form>
+    </section>
+        
+{% endblock contenido %}

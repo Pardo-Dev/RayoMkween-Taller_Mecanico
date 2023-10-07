@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/ficha.css'%}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="atencion">
+        
+        
+        <div class="container">
+            <h1 class="titulo text-center">{{atenciones.titulo}}</h1>
+            <div class="descripcion">
+                <img class="img-ficha mx-auto d-block" src="{{atenciones.foto.url}}">
+                <p>Especialidad: {{atenciones.tipoAte}}</p>
+                <p>{{atenciones.descAte}}</p>
+                <p>{{atenciones.materiales}}</p>
+                <p>{{atenciones.fecha}}</p>
+                <p>{{rut_mecanico.nombre}}</p>
+            </div>
+            <h2 class="text-center titulo">Galeria:</h2>
+            <div class="galeria">
+                {% for item in galerias %}
+                    <img class="img-galeria" src="{{item.foto.url}}">
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+
+    
+{% endblock contenido %}

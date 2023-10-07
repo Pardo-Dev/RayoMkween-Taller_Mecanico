@@ -1,0 +1,27 @@
+.titulo{
+    margin-top: 10%;
+    color: white;
+}
+
+.img-ficha{
+    height: 200px;
+    width: 200px;
+}
+
+.descripcion{
+    text-align: center;
+    color: white;
+}
+
+.galeria{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.img-galeria{
+    margin: 10px 10px;
+    width: 200px;
+    height: 200px;
+}

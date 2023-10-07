@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+    <section id="formulario" class="">
+        <h1>Formulario de contacto</h1>
+        <p>Envianos alguna duda o comentario, te responderemos a la brevedad!</p>
+        <form action="" method="POST">
+            <div class="contenedor-form">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="Enviar" id="btnEnviar">
+
+            </div>
+        </form>
+    </section>
+
+    {% if messages %}
+      {% for m in messages %}
+            <script>
+                function exito(){
+
+                    Swal.fire({
+                        "title": "Felicitaciones!",
+                        "text": "{{m}}",
+                        "icon": "success",
+                        "confirmButtonText": "Continuar"
+                    })
+                }
+            </script>
+        {% endfor %}
+    {% endif %}
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock js %}
+{% endblock contenido %}

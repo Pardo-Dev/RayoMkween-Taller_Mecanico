@@ -1,0 +1,13 @@
+h1, p, th{
+    color: white;
+}
+
+th{
+    margin: 0px 20px;
+}
+
+a{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}

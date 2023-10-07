@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/productos.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="titulo-principal">
+        <h1 class="titulo text-center">Productos</h1>
+    </div>
+
+    <!-- Cards -->
+    <div class="productos">
+        <div class="orden-cards">
+            <!-- Cards --> 
+            {% for producto in productos %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{producto.foto.url}}" class="card-img-top img-card" >
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre}}</h5>                        
+                    <p class="card-text">{{ producto.descripcion }}</p>
+                    <p>Precio: $ {{producto.precio }}</p>
+                    <a href="{% url 'AC' producto.idProducto %}" class="btn btn-primary">Añadir al carrito</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if request.session.carrito.items %}
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 46%;">
+        Ver carrito
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+                
+                    <div class="">
+                        <div class="header-carrito">
+                            <h2>Tu Carrito</h2>
+                        </div>
+
+                        <div class="carrito-items">
+                            <div class="carrito-item">
+                                {% for key , value in request.session.carrito.items  %}
+                                <div class="carrito-item-detalles">
+                                    
+                                    <span class="carrito-item-titulo">{{value.nombre}}</span>
+                                    <div class="selector-cantidad">
+                                        <a href="{% url 'RC' value.idProducto %}" class="fa-solid fa-minus" style="text-decoration: none; color: rgb(30, 48, 80);"></a>
+                                        {{value.cantidad}}
+                                        <a href="{% url 'AC' value.idProducto %}" class="fa-solid fa-plus fa-sm" style="text-decoration: none; color: rgb(30, 48, 80);"></a>
+                                    </div>
+                                    <span class="carrito-item-precio">${{value.precio}} CLP</span>
+                                    <a href="{% url 'EC' value.idProducto %}" class="fa-solid fa-trash" style="text-decoration: none;"></a>
+                                </div>
+                                <hr>
+                                {% endfor %}
+                            </div>
+
+                            <div class="carrito-total">
+                                <div class="fila">
+                                    <strong>Tu total</strong>
+                                    <span class="carrito-precio-total">${{total}}</span>
+                                </div>
+                                <button class="btn-pagar">pagar</button>
+                            </div>
+
+                        </div>
+                    </div>
+                
+             
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    {% endif %}
+
+    </div>
+
+{% endblock  %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="inicio">
+        <h1 class=" titulo text-center">Revisa nuestras ultimas atenciones!</h1>
+    </div>
+    <div class="container">
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              {% for atencion in atenciones %}
+              <div class="carousel-item active">
+                <img src="{{ atencion.foto.url }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block fondo-letras">
+                  <h5>{{ atencion.titulo }}</h5>
+                  <p>{{ atencion.descAte }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Servicios -->
+        <div class="servicios">
+            <h1 class="titulo text-center">Servicios</h1>
+        </div>
+
+        <div class="orden-cards">
+            <!-- Cards -->
+            {% for especialidad in especialidades %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ especialidad.foto.url }}" class="card-img-top img-card" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{especialidad.nombre}}</h5>
+                  <p class="card-text">{{especialidad.descripcion}}</p>
+                  <a href="#" class="btn btn-primary">Más información...</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+{% endblock contenido %}

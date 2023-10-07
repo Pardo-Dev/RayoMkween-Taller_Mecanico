@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/mecanicos.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="titulo-principal">
+        <h1 class="titulo text-center">Mecánicos</h1>
+    </div>
+    
+        <div class="filtros">
+            <form action="{% url 'FILTRO_NOM' %}" method="post">
+            {% csrf_token %}
+                <div class="orden-filtros">
+                    <p class="titulo-filtro"> Buscar mecanico por nombre: </p>
+                    <input type="text" name="txtBuscar" id="txtBuscar">
+                    <input type="submit" value="Buscar">
+                </div>
+            </form>
+        </div>
+        <div class="filtros">
+            <form action="{% url 'FILTRO_ESPE' %}" method="post">
+                <div class="orden-filtros">
+                    {% csrf_token %}
+                    <p class="titulo-filtro">Buscar mecanico por especialidad:</p>
+                    <select name="cboEspecialidad">
+                    {% for especialidad in especialidades %}
+                        <option>{{especialidad.nombre}}</option>
+                    {% endfor %}
+                    <option>Todas</option>
+                    </select>          
+                    <input type="submit" value="Buscar">
+                </div>
+          </form>
+        </div>
+        
+        <div class="mecanicos">
+            <div class="orden-cards">
+                <!-- Cards -->
+                {% for mecanico in mecanicos %}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ mecanico.foto.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ mecanico.nombre }}</h5>
+                    <h6 class="card-title">{{ mecanico.especialidad }}</h6>
+                    
+                    <p class="card-text">{{ mecanico.descripcion }}</p>
+                    <a href="#" class="btn btn-primary">Más información...</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+{% endblock contenido %}

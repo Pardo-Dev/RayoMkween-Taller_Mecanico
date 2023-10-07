@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="titulo-principal">
+        <h1 class="titulo text-center">Taller Mecánico RayoMkween</h1>
+    </div>
+
+    <section id="formulario">
+        <h1>Inicio de sesion</h1>
+        <form action="{% url 'LOGIN' %}" method="POST">
+            {% csrf_token %}
+            <div class="contenedor-form">
+                <label for="text">Usuario *</label>
+                <input type="text" name="txtNombre" id="txtNombre" placeholder="Ingrese su usuario">
+
+                <label for="mensaje">Contraseña *</label>
+                <input type="password" name="pwdPass1" id="pwdPass1" placeholder="Ingrese contraseña">
+                <div class="btns">
+                    <input type="submit" value="Enviar" id="btnEnviar">
+                
+                    <a href="{% url 'REGISTRO' %}"><input type="button" value="Registrarse"></a>
+                </div>
+                
+            </div>
+        </form>
+    </section>
+{% endblock contenido %}

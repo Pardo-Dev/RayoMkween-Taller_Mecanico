@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="titulo-principal">
+        <h1 class="titulo text-center">Perfil</h1>
+    </div>
+
+    <div class="container">
+        <div class="datos-perfil bg-dark">
+            <div class="titulo-principal">
+                <h1 class="titulo text-center">Datos Personales</h1>
+            </div>
+            <div class="datos-separados">
+                <h4 class="label-datos">Nombre de usuario:</h4>
+                <input type="text" value="{{ user.username }}" disabled>
+            </div>
+
+            <div class="datos-separados">
+                <h4 class="label-datos">Nombre completo:</h4>
+                <input type="text" value="{{ user.first_name }} {{ user.last_name}}" disabled>
+            </div>
+
+            <div class="datos-separados">
+                <h4 class="label-datos">Correo electronico:</h4>
+                <input type="text" value="{{ user.email }}" disabled>
+            </div>
+
+            <div class="datos-separados">
+                <h4 class="label-datos">CODIGO DE USUARIO:</h4>
+                <input type="text" value="#41C9P47" disabled>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

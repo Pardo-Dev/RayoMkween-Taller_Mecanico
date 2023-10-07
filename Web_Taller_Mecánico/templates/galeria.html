@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/galeria.css' %}">
+{% endblock css %}
+
+{% block contenido %}
+    <div class="titulo-principal">
+        <h1 class="titulo text-center">Atenciones</h1>
+    </div>
+
+    <!-- Cards -->
+    <div class="atenciones">
+        <div class="orden-cards">
+            <!-- Cards -->
+            {% for atencion in atenciones %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ atencion.foto.url }}" class="card-img-top img-card" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{atencion.titulo}}</h5>                        
+                    <p class="card-text">{{atencion.descAte}}</p>
+                        <a href="{% url 'FICHA' atencion.idAtencion %}" class="btn btn-primary">Más información...</a>
+                        {% if user.is_superuser %}
+                        <div class="btn-superuser">
+                            <button class="btn btn-primary btn-a" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="galeria_id({{atencion.idAtencion}})">Agregar Foto</button>
+                            <button class="btn btn-primary btn-a" onclick="modificar({{atencion.idAtencion}})">Modificar</button>
+                            <a href="#" class="btn btn-primary btn-a" onclick="eliminar({{atencion.idAtencion}})">Eliminar</a>
+                        </div>
+                        {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    
+    
+        <!--Modal-->
+    {% for atencion in atenciones %}
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+        
+            <div class="modal-content">
+        
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Foto a Galeria</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+        
+                <form action="{% url 'GG' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <input type="hidden" name="txtId" id="txtId" value="">
+                        <input type="file" name="txtFoto" id="txtFoto">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Grabar</button>
+                    </div>
+                </form>
+        
+            </div>
+            </div>
+        </div>
+    {%endfor%}
+
+    
+
+    
+
+
+  <script>
+    function eliminar(id) {
+        Swal.fire({
+        title: 'Eliminar',
+        text: "Está segur@ de eliminar la atención?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText:'No',
+        confirmButtonText: 'Si'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            location.href='/eliminar/'+id+'/';
+        }
+                })
+    }
+    function modificar(id) {
+        location.href='/modificar_atencion/'+id+'/';
+    }
+
+    function galeria_id(id) {
+        document.getElementById("txtId").value=id;
+    }
+  </script>
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock js %}
+</div>
+{% endblock contenido %}
